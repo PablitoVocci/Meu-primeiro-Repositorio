@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    Informe a quantidade de lampadas no seu escritorio: <input id = "input_lampada"><br>
+    Informe a quantidade de sala da sua empresa: <input id = "input_sala"><br>
+    Informe quantas horas a luz das salas ficam acesas: <input id = "input_horas_Luz"><br>
+    Informe a potencia das lampadas sua da empresa (por watts): <input id = "input_watts"><br>
+    Informe o preço tabelado de KWH na sua região: <input id = "input_KWH"><br>
+    Informe quantos dias sua empresa ativa: <input id = "input_dias"><br>
+    Informe quantos dias da semana sua empresa fica ativa: <input id = "input_dia_sema">
+    
+    <button onclick="calcular_gasto()">calcular gasto</button>
+    <div id = "exibir"></div>
+
+
+
+
+
+</body>
+</html>
+
+<script>
+
+function calcular_gasto(){
+exibir.innerHTML = ``
+
+var qtd_lamp = Number (input_lampada.value)
+var qtd_salas = Number (input_sala.value)
+var qnts_hrs_luz = Number (input_horas_Luz.value)
+var poten_luz = Number (input_watts.value)
+var dias_func = Number (input_dias.value)
+var preco_tab_KWH = Number (input_KWH.value) 
+var dia_semana = Number (input_dia_sema.value)
+
+
+// var gasto_dia = (qnts_hrs_luz * preco_tab_KWH) * ((qtd_lamp * qtd_salas * poten_luz) / 1000)
+var gasto_dia = ((qnts_hrs_luz * poten_luz * qtd_lamp * qtd_salas) / 1000) * preco_tab_KWH
+var gasto_semana = gasto_dia * dia_semana
+var gasto_mes = gasto_semana * 4
+var gasto_ano = gasto_mes * 12
+var media_gasto = (1.0 + 0.6 + 0.3) / 3
+
+var Ligh_tech = preco_tab_KWH * (media_gasto);
+
+
+var Novo_gasto_dia = ((qnts_hrs_luz * poten_luz * qtd_lamp * qtd_salas) / 1000) * Ligh_tech
+var Novo_gasto_semana = Novo_gasto_dia * dia_semana;
+var Novo_gasto_mes = Novo_gasto_semana * 4
+var Novo_gasto_ano = Novo_gasto_mes * 12
+
+var lucro_mes = gasto_mes - Novo_gasto_mes.toFixed(2);
+var lucro_ano = gasto_ano - Novo_gasto_ano.toFixed(2);
+
+exibir.innerHTML = `O Gasto da sua empresa com a luz elétrica antes da nossa implementação é de:<br>
+Por dia: R$ ${gasto_dia.toFixed(2)}<br>
+por semana: R$ ${gasto_semana.toFixed(2)}<br>
+por mes: R$ ${gasto_mes.toFixed(2)}<br>
+por ano: R$ ${gasto_ano.toFixed(2)}<br>
+Agora, com a nossa implementação, sua empresa gastaria: <br>
+Por dia: R$ ${Novo_gasto_dia.toFixed(2)}<br>
+Por semana: R$ ${Novo_gasto_semana.toFixed(2)}<br>
+Por mes: R$ ${Novo_gasto_mes.toFixed(2)}<br>
+Por ano: R$ ${Novo_gasto_ano.toFixed(2)}<br>
+O seu lucro no mes seria de: R$ ${lucro_mes.toFixed(2)}<br>
+E o seu lucro no ano seria de R$ ${lucro_ano.toFixed(2)} `
+
+}
+
+
+
+
+</script>
